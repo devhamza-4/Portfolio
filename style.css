@@ -108,6 +108,7 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -118,6 +119,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   /* Smooth theme switching */
   transition: background-color 0.4s var(--ease-in-out), color 0.4s var(--ease-in-out);
 }
@@ -449,7 +451,7 @@ input, textarea { font-family: var(--font-body); }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.75rem, 5.5vw, 4.25rem);
+  font-size: clamp(2rem, 8vw, 4.25rem);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -.04em;
@@ -483,6 +485,7 @@ input, textarea { font-family: var(--font-body); }
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto;
   gap: 14px;
+  min-width: 0;
 }
 
 .bento-card {
@@ -492,6 +495,7 @@ input, textarea { font-family: var(--font-body); }
   padding: 22px;
   box-shadow: var(--shadow-xs);
   transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base);
+  min-width: 0;
 }
 .bento-card:hover {
   transform: translateY(-3px);
@@ -1127,6 +1131,7 @@ input, textarea { font-family: var(--font-body); }
   border-radius: 4px;
   display: inline-block;
   margin-bottom: 8px;
+  word-break: break-all;
 }
 
 .audit-header h3 {
@@ -1350,6 +1355,7 @@ input, textarea { font-family: var(--font-body); }
   gap: 10px;
   font-size: 0.9rem;
   color: var(--clr-text-2);
+  word-break: break-word;
 }
 .contact-info-item svg { color: var(--clr-text-3); flex-shrink: 0; }
 
@@ -1558,7 +1564,7 @@ input, textarea { font-family: var(--font-body); }
 @media (max-width: 768px) {
   /* Mobile nav — respects dark mode */
   .nav-links {
-    display: none;
+    display: flex;
     position: absolute;
     top: 68px;
     inset: auto 0 auto 0;
@@ -1571,8 +1577,17 @@ input, textarea { font-family: var(--font-body); }
     -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-md);
     z-index: 199;
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
   }
-  .nav-links.open { display: flex; }
+  .nav-links.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
   .hamburger      { display: flex; }
 
   .hero-bento     { grid-template-columns: 1fr; }
@@ -1599,6 +1614,10 @@ input, textarea { font-family: var(--font-body); }
   .btn            { width: 100%; }
   .service-card   { padding: 32px 24px; }
   .hero-title     { letter-spacing: -.03em; }
+  .container      { padding: 0 16px; }
+  .nav-inner      { padding: 0 12px 0 16px; }
+  .logo-text      { font-size: 0.9rem; }
+  .bento-card     { padding: 16px; }
 }
 
 /* ── DARK MODE ELEMENT OVERRIDES ─────────────────────── */
