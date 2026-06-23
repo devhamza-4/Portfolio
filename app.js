@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Apply saved theme (or system preference as fallback)
   const savedTheme = localStorage.getItem(STORAGE_KEY);
   const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const initTheme  = savedTheme || (systemDark ? 'dark' : 'light');
+  const initTheme  = savedTheme || 'dark';
   html.setAttribute('data-theme', initTheme);
 
   themeToggle.addEventListener('click', () => {
